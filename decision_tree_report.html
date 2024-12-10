@@ -1,0 +1,157 @@
+
+<html>
+<head><title>Decision Tree Classifier Report</title></head>
+<body>
+<h1>Decision Tree Classifier Report</h1>
+
+<h2>Dataset Information</h2>
+<pre><class 'pandas.core.frame.DataFrame'>
+RangeIndex: 4119 entries, 0 to 4118
+Data columns (total 21 columns):
+ #   Column          Non-Null Count  Dtype  
+---  ------          --------------  -----  
+ 0   age             4119 non-null   int64  
+ 1   job             4119 non-null   object 
+ 2   marital         4119 non-null   object 
+ 3   education       4119 non-null   object 
+ 4   default         4119 non-null   object 
+ 5   housing         4119 non-null   object 
+ 6   loan            4119 non-null   object 
+ 7   contact         4119 non-null   object 
+ 8   month           4119 non-null   object 
+ 9   day_of_week     4119 non-null   object 
+ 10  duration        4119 non-null   int64  
+ 11  campaign        4119 non-null   int64  
+ 12  pdays           4119 non-null   int64  
+ 13  previous        4119 non-null   int64  
+ 14  poutcome        4119 non-null   object 
+ 15  emp.var.rate    4119 non-null   float64
+ 16  cons.price.idx  4119 non-null   float64
+ 17  cons.conf.idx   4119 non-null   float64
+ 18  euribor3m       4119 non-null   float64
+ 19  nr.employed     4119 non-null   float64
+ 20  y               4119 non-null   object 
+dtypes: float64(5), int64(5), object(11)
+memory usage: 675.9+ KB
+</pre>
+
+<h2>Model Evaluation</h2>
+<p>Accuracy: 0.9101941747572816</p>
+<pre><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>precision</th>
+      <th>recall</th>
+      <th>f1-score</th>
+      <th>support</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>False</th>
+      <td>0.944595</td>
+      <td>0.954918</td>
+      <td>0.949728</td>
+      <td>732.000000</td>
+    </tr>
+    <tr>
+      <th>True</th>
+      <td>0.607143</td>
+      <td>0.554348</td>
+      <td>0.579545</td>
+      <td>92.000000</td>
+    </tr>
+    <tr>
+      <th>accuracy</th>
+      <td>0.910194</td>
+      <td>0.910194</td>
+      <td>0.910194</td>
+      <td>0.910194</td>
+    </tr>
+    <tr>
+      <th>macro avg</th>
+      <td>0.775869</td>
+      <td>0.754633</td>
+      <td>0.764637</td>
+      <td>824.000000</td>
+    </tr>
+    <tr>
+      <th>weighted avg</th>
+      <td>0.906918</td>
+      <td>0.910194</td>
+      <td>0.908397</td>
+      <td>824.000000</td>
+    </tr>
+  </tbody>
+</table></pre>
+
+<h2>Decision Tree Rules</h2>
+<pre>|--- duration <= 563.50
+|   |--- nr.employed <= 5087.65
+|   |   |--- duration <= 165.50
+|   |   |   |--- pdays <= 3.50
+|   |   |   |   |--- class: True
+|   |   |   |--- pdays >  3.50
+|   |   |   |   |--- class: False
+|   |   |--- duration >  165.50
+|   |   |   |--- contact_telephone <= 0.50
+|   |   |   |   |--- pdays <= 15.50
+|   |   |   |   |   |--- class: True
+|   |   |   |   |--- pdays >  15.50
+|   |   |   |   |   |--- class: True
+|   |   |   |--- contact_telephone >  0.50
+|   |   |   |   |--- duration <= 352.50
+|   |   |   |   |   |--- class: False
+|   |   |   |   |--- duration >  352.50
+|   |   |   |   |   |--- class: True
+|   |--- nr.employed >  5087.65
+|   |   |--- month_mar <= 0.50
+|   |   |   |--- duration <= 416.00
+|   |   |   |   |--- month_oct <= 0.50
+|   |   |   |   |   |--- class: False
+|   |   |   |   |--- month_oct >  0.50
+|   |   |   |   |   |--- class: True
+|   |   |   |--- duration >  416.00
+|   |   |   |   |--- class: False
+|   |   |--- month_mar >  0.50
+|   |   |   |--- duration <= 221.00
+|   |   |   |   |--- class: False
+|   |   |   |--- duration >  221.00
+|   |   |   |   |--- class: True
+|--- duration >  563.50
+|   |--- duration <= 838.50
+|   |   |--- euribor3m <= 1.32
+|   |   |   |--- class: True
+|   |   |--- euribor3m >  1.32
+|   |   |   |--- job_technician <= 0.50
+|   |   |   |   |--- age <= 58.50
+|   |   |   |   |   |--- class: False
+|   |   |   |   |--- age >  58.50
+|   |   |   |   |   |--- class: True
+|   |   |   |--- job_technician >  0.50
+|   |   |   |   |--- education_high.school <= 0.50
+|   |   |   |   |   |--- class: False
+|   |   |   |   |--- education_high.school >  0.50
+|   |   |   |   |   |--- class: True
+|   |--- duration >  838.50
+|   |   |--- cons.conf.idx <= -42.35
+|   |   |   |--- class: True
+|   |   |--- cons.conf.idx >  -42.35
+|   |   |   |--- default_unknown <= 0.50
+|   |   |   |   |--- pdays <= 508.50
+|   |   |   |   |   |--- class: True
+|   |   |   |   |--- pdays >  508.50
+|   |   |   |   |   |--- class: False
+|   |   |   |--- default_unknown >  0.50
+|   |   |   |   |--- class: True
+</pre>
+
+<h2>Decision Tree Visualization</h2>
+<object data="tree.pdf" type="application/pdf" width="100%" height="600px">
+    <embed src="tree.pdf" type="application/pdf">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="tree.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
+</body>
+</html>
